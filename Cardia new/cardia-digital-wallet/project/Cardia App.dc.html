@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:#0F1B3D;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#1F5BFF;text-decoration:none}a:hover{color:#0B3FD1}
+input{font-family:inherit}
+</style>
+</helmet>
+<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 16px;background:radial-gradient(60% 50% at 15% 30%,#DCE7FB 0%,transparent 70%),radial-gradient(50% 50% at 90% 80%,#E3ECFB 0%,transparent 70%),#F2F6FC">
+<x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" hint-size="402px,874px">
+<div style="position:relative;height:100%;display:flex;flex-direction:column;background:#F6F8FC;font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:#0F1B3D">
+
+<div ref="{{ scrollRef }}" style="flex:1;overflow-y:auto;overflow-x:hidden;padding-top:56px;scrollbar-width:none">
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<div style="padding:4px 22px 0;display:flex;align-items:center;gap:12px">
+  <svg width="40" height="44" viewBox="0 0 40 44" fill="none"><defs><linearGradient id="cg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3B82FF"></stop><stop offset="1" stop-color="#0B3FD1"></stop></linearGradient></defs><path d="M31 11.5A14 14 0 1 0 31 32.5" stroke="url(#cg)" style="stroke-width:10;stroke-linecap:round"></path></svg>
+  <div style="flex:1;min-width:0">
+    <div style="font-size:23px;font-weight:800;letter-spacing:.07em;line-height:1.1">CARDIA</div>
+    <div style="font-size:11.5px;color:#4A5675;margin-top:3px;white-space:nowrap">Toutes vos cartes. Un seul endroit.</div>
+  </div>
+  <div style="display:flex;gap:10px">
+    <div onClick="{{ goSearch }}" style="width:44px;height:44px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(30,60,140,.08);cursor:pointer;color:#0F1B3D">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:2;stroke-linecap:round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+    </div>
+    <div onClick="{{ openReminder }}" style="position:relative;width:44px;height:44px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(30,60,140,.08);cursor:pointer;color:#0F1B3D">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+      <sc-if value="{{ showReminder }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;top:10px;right:11px;width:8px;height:8px;border-radius:50%;background:#F0443A;border:2px solid #fff"></div></sc-if>
+    </div>
+  </div>
+</div>
+
+<div style="padding:24px 22px 0">
+  <div style="font-size:22px;font-weight:700;letter-spacing:-.01em">Bonjour {{ firstName }} 👋</div>
+  <div style="font-size:14.5px;color:#4A5675;margin-top:4px">Votre portefeuille numérique est prêt.</div>
+</div>
+
+<div onPointerDown="{{ swipeStart }}" onPointerMove="{{ swipeMove }}" onPointerUp="{{ swipeEnd }}" onPointerCancel="{{ swipeCancel }}" style="position:relative;height:190px;margin-top:22px;perspective:1100px;touch-action:none;user-select:none">
+  <sc-for list="{{ carousel }}" as="c" hint-placeholder-count="3">
+    <div onClick="{{ c.onClick }}" style="position:absolute;top:8px;left:calc(50% - 128px);width:256px;height:168px;cursor:pointer;transform-style:preserve-3d;transform:{{ c.transform }};z-index:{{ c.z }};opacity:{{ c.opacity }};pointer-events:{{ c.pe }};transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .35s">
+    <div style="position:absolute;inset:0;transform-style:preserve-3d;transform:{{ c.flip }};transition:transform .6s cubic-bezier(.3,.7,.2,1)">
+    <div style="position:absolute;inset:0;border-radius:20px;padding:16px 18px 14px;display:flex;flex-direction:column;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:{{ c.bg }};color:{{ c.fg }};box-shadow:0 18px 36px rgba(15,35,90,.22)">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
+        <div style="font-size:16px;font-weight:700">{{ c.name }}</div>
+        <sc-if value="{{ c.isBank }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:2;stroke-linecap:round;opacity:.85"><path d="M8 8.5a5 5 0 0 1 0 7"></path><path d="M12 6a9 9 0 0 1 0 12"></path><path d="M16 3.5a13 13 0 0 1 0 17"></path></svg></sc-if>
+      </div>
+      <div style="font-size:11px;opacity:.75;margin-top:2px">{{ c.sub }}</div>
+      <div style="flex:1;display:flex;align-items:center;justify-content:space-between">
+        <div style="font-size:15px;font-weight:600;letter-spacing:.08em">{{ c.masked }}</div>
+        <sc-if value="{{ c.isMc }}"><div style="display:flex"><div style="width:30px;height:30px;border-radius:50%;background:#EB001B"></div><div style="width:30px;height:30px;border-radius:50%;background:#F79E1B;margin-left:-12px;mix-blend-mode:screen;opacity:.95"></div></div></sc-if>
+        <sc-if value="{{ c.isVisa }}"><div style="font-size:22px;font-weight:800;font-style:italic;letter-spacing:.02em">VISA</div></sc-if>
+        <sc-if value="{{ c.isId }}"><div style="width:34px;height:34px;border-radius:50%;border:1.5px solid currentColor;opacity:.55;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700">RT</div></sc-if>
+      </div>
+      <div style="font-size:9.5px;opacity:.7">{{ c.expLabel }}</div>
+      <div style="font-size:12px;font-weight:600">{{ c.exp }}</div>
+      <div style="font-size:11.5px;font-weight:600;margin-top:8px;white-space:nowrap">{{ c.holder }}</div>
+    </div>
+    <div style="position:absolute;inset:0;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateX(180deg);background:{{ c.bg }};color:{{ c.fg }};box-shadow:0 18px 36px rgba(15,35,90,.22)">
+      <sc-if value="{{ c.backBank }}">
+        <div style="height:34px;background:#0B0F1A;margin-top:18px"></div>
+        <div style="display:flex;align-items:center;gap:10px;padding:12px 18px 0">
+          <div style="flex:1;height:30px;border-radius:4px;background:repeating-linear-gradient(-45deg,#F3F4F7 0 6px,#E4E7EE 6px 12px)"></div>
+          <div style="height:30px;padding:0 10px;border-radius:4px;background:#fff;color:#0F1B3D;display:flex;align-items:center;font-size:12px;font-weight:700;letter-spacing:.12em">{{ c.cvv }}</div>
+        </div>
+        <div style="flex:1;display:flex;align-items:flex-end;justify-content:space-between;gap:10px;padding:0 18px 14px">
+          <div style="font-size:9.5px;line-height:1.45;opacity:.8">{{ c.sub }} · Service client 24/7<br>Carte strictement personnelle</div>
+          <sc-if value="{{ c.isMc }}"><div style="display:flex;flex-shrink:0"><div style="width:22px;height:22px;border-radius:50%;background:#EB001B"></div><div style="width:22px;height:22px;border-radius:50%;background:#F79E1B;margin-left:-9px;opacity:.95"></div></div></sc-if>
+          <sc-if value="{{ c.isVisa }}"><div style="font-size:16px;font-weight:800;font-style:italic;flex-shrink:0">VISA</div></sc-if>
+        </div>
+      </sc-if>
+      <sc-if value="{{ c.backId }}">
+        <div style="display:grid;grid-template-columns:auto 1fr;column-gap:12px;row-gap:3px;padding:16px 18px 0;font-size:10.5px">
+          <div style="opacity:.65">Né(e) le</div><div style="font-weight:600">12/05/1994</div>
+          <div style="opacity:.65">Lieu</div><div style="font-weight:600">Lomé, Togo</div>
+          <div style="opacity:.65">Délivrée le</div><div style="font-weight:600">14/03/2021</div>
+        </div>
+        <div style="margin-top:auto;padding:8px 14px 12px;background:rgba(255,255,255,.55);font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.06em;line-height:1.5;white-space:nowrap;overflow:hidden">{{ c.mrz1 }}<br>{{ c.mrz2 }}</div>
+      </sc-if>
+      <sc-if value="{{ c.backCode }}">
+        <div style="padding:14px 18px 0;font-size:12px;font-weight:700">{{ c.name }}</div>
+        <div style="margin:10px 18px 0;flex:1;border-radius:10px;background:#fff;color:#0F1B3D;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px">
+          <div style="width:100%;height:46px;background:repeating-linear-gradient(90deg,#0F1B3D 0 2px,transparent 2px 4px,#0F1B3D 4px 5px,transparent 5px 8px,#0F1B3D 8px 11px,transparent 11px 12px)"></div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:.12em">{{ c.num }}</div>
+        </div>
+        <div style="padding:8px 18px 12px;font-size:9.5px;opacity:.8">Présentez ce code au contrôle</div>
+      </sc-if>
+    </div>
+    </div>
+    </div>
+  </sc-for>
+</div>
+<div style="display:flex;justify-content:center;gap:6px;margin-top:8px">
+  <sc-for list="{{ dots }}" as="d" hint-placeholder-count="4">
+    <div onClick="{{ d.onClick }}" style="height:7px;border-radius:4px;cursor:pointer;width:{{ d.w }};background:{{ d.bg }};transition:width .3s"></div>
+  </sc-for>
+</div>
+<div style="text-align:center;font-size:11.5px;color:#7A86A3;margin-top:8px">{{ flipHint }}</div>
+
+<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:24px 20px 0">
+  <div onClick="{{ openAdd }}" style="background:#fff;border-radius:20px;padding:16px 4px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;box-shadow:0 6px 18px rgba(30,60,140,.06);cursor:pointer">
+    <div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(145deg,#3B82FF,#1347E0);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:2.2;stroke-linecap:round"><path d="M12 5v14M5 12h14"></path></svg></div>
+    <div style="font-size:12.5px;font-weight:600;text-align:center;line-height:1.3">Ajouter<br>une carte</div>
+  </div>
+  <div onClick="{{ openScan }}" style="background:#fff;border-radius:20px;padding:16px 4px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;box-shadow:0 6px 18px rgba(30,60,140,.06);cursor:pointer">
+    <div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(145deg,#A78BFA,#6D4AE8);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:2;stroke-linecap:round"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2M7 12h10"></path></svg></div>
+    <div style="font-size:12.5px;font-weight:600;text-align:center;line-height:1.3">Scanner<br>une carte</div>
+  </div>
+  <div onClick="{{ goDocs }}" style="background:#fff;border-radius:20px;padding:16px 4px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;box-shadow:0 6px 18px rgba(30,60,140,.06);cursor:pointer">
+    <div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(145deg,#34D399,#0E9F6E);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5M9 13h6M9 17h6"></path></svg></div>
+    <div style="font-size:12.5px;font-weight:600;text-align:center;line-height:1.3">Mes<br>documents</div>
+  </div>
+  <div onClick="{{ goProfile }}" style="background:#fff;border-radius:20px;padding:16px 4px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;box-shadow:0 6px 18px rgba(30,60,140,.06);cursor:pointer">
+    <div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(145deg,#FF9A4D,#F2611D);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"></path><path d="M12 8v5"></path><circle cx="12" cy="16" r=".6"></circle></svg></div>
+    <div style="font-size:12.5px;font-weight:600;text-align:center;line-height:1.3">Sécurité</div>
+  </div>
+</div>
+
+<div style="display:flex;align-items:center;justify-content:space-between;padding:28px 22px 14px">
+  <div style="font-size:18px;font-weight:700">Catégories</div>
+  <div onClick="{{ goAll }}" style="display:flex;align-items:center;gap:4px;font-size:13px;color:#5B6B90;cursor:pointer">Tout voir <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:2.2;stroke-linecap:round"><path d="M9 6l6 6-6 6"></path></svg></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));row-gap:16px;padding:0 12px">
+  <div onClick="{{ cat.identite }}" style="display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer"><div style="width:52px;height:52px;border-radius:16px;background:#E3EEFF;color:#2563EB;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:1.9;stroke-linecap:round"><rect x="3" y="5" width="18" height="14" rx="2.5"></rect><circle cx="9" cy="11" r="2"></circle><path d="M6 16c.6-1.4 1.8-2 3-2s2.4.6 3 2M14.5 10h3.5M14.5 14h3.5"></path></svg></div><div style="font-size:12px;font-weight:500">Identité</div></div>
+  <div onClick="{{ cat.bancaire }}" style="display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer"><div style="width:52px;height:52px;border-radius:16px;background:#ECE8FF;color:#6D4AE8;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:1.9;stroke-linecap:round"><rect x="3" y="5" width="18" height="14" rx="2.5"></rect><path d="M3 10h18M7 15h4"></path></svg></div><div style="font-size:12px;font-weight:500">Bancaire</div></div>
+  <div onClick="{{ cat.transport }}" style="display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer"><div style="width:52px;height:52px;border-radius:16px;background:#DDF5EA;color:#0E9F6E;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:1.9;stroke-linecap:round"><rect x="5" y="3" width="14" height="15" rx="3"></rect><path d="M5 11h14M8 21v-3M16 21v-3M8.5 14.5h.01M15.5 14.5h.01"></path></svg></div><div style="font-size:12px;font-weight:500">Transport</div></div>
+  <div onClick="{{ cat.assurance }}" style="display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer"><div style="width:52px;height:52px;border-radius:16px;background:#FFE4E6;color:#E5484D;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg></div><div style="font-size:12px;font-weight:500">Assurance</div></div>
+  <div onClick="{{ cat.education }}" style="display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer"><div style="width:52px;height:52px;border-radius:16px;background:#FFF1D6;color:#D9822B;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round"><path d="M2 9l10-5 10 5-10 5z"></path><path d="M6 11v5c3 2 9 2 12 0v-5M22 9v5"></path></svg></div><div style="font-size:12px;font-weight:500">Éducation</div></div>
+  <div onClick="{{ cat.professionnel }}" style="display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer"><div style="width:52px;height:52px;border-radius:16px;background:#E6EBF5;color:#3B4A6B;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:1.9;stroke-linecap:round"><rect x="3" y="7" width="18" height="13" rx="2.5"></rect><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"></path></svg></div><div style="font-size:12px;font-weight:500">Professionnel</div></div>
+  <div onClick="{{ cat.sante }}" style="display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer"><div style="width:52px;height:52px;border-radius:16px;background:#D9F5F1;color:#0E9488;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round"><path d="M12 20s-8-4.5-8-10.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 2.5C20 15.5 12 20 12 20z"></path><path d="M7.5 12h3l1.2-2 2 4 1.3-2h1.5"></path></svg></div><div style="font-size:12px;font-weight:500">Santé</div></div>
+  <div onClick="{{ cat.fidelite }}" style="display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer"><div style="width:52px;height:52px;border-radius:16px;background:#EFE7FF;color:#7C3AED;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:1.9;stroke-linejoin:round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"></path></svg></div><div style="font-size:12px;font-weight:500">Fidélité</div></div>
+  <div onClick="{{ cat.autre }}" style="display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer"><div style="width:52px;height:52px;border-radius:16px;background:#ECEFF4;color:#5B6B90;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="18" cy="12" r="1.8"></circle></svg></div><div style="font-size:12px;font-weight:500">Autre</div></div>
+</div>
+
+<sc-if value="{{ showReminder }}" hint-placeholder-val="{{ true }}">
+<div onClick="{{ openReminder }}" style="margin:26px 20px 0;background:#fff;border-radius:20px;padding:16px;display:flex;align-items:center;gap:14px;box-shadow:0 6px 18px rgba(30,60,140,.06);cursor:pointer">
+  <div style="width:44px;height:44px;border-radius:50%;background:#EEF2F8;display:flex;align-items:center;justify-content:center;color:#0F1B3D;flex-shrink:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg></div>
+  <div style="flex:1;min-width:0">
+    <div style="font-size:14.5px;font-weight:700">1 rappel important</div>
+    <div style="font-size:13px;color:#4A5675;margin-top:2px">Votre assurance expire dans 30 jours.</div>
+  </div>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5B6B90" style="stroke-width:2.2;stroke-linecap:round"><path d="M9 6l6 6-6 6"></path></svg>
+</div>
+</sc-if>
+<div style="height:28px"></div>
+</sc-if>
+
+<sc-if value="{{ isCards }}" hint-placeholder-val="{{ false }}">
+<div style="padding:8px 22px 0;display:flex;align-items:center;justify-content:space-between">
+  <div>
+    <div style="font-size:26px;font-weight:800;letter-spacing:-.01em">Mes cartes</div>
+    <div style="font-size:13.5px;color:#4A5675;margin-top:2px">{{ cardsCountLabel }}</div>
+  </div>
+  <div onClick="{{ openAdd }}" style="width:44px;height:44px;border-radius:50%;background:#1F5BFF;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 18px rgba(31,91,255,.3)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:2.4;stroke-linecap:round"><path d="M12 5v14M5 12h14"></path></svg></div>
+</div>
+<div style="display:flex;gap:8px;overflow-x:auto;padding:18px 22px 4px;scrollbar-width:none">
+  <sc-for list="{{ chips }}" as="ch" hint-placeholder-count="5">
+    <div onClick="{{ ch.onClick }}" style="flex-shrink:0;height:36px;padding:0 15px;border-radius:18px;display:flex;align-items:center;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;background:{{ ch.bg }};color:{{ ch.fg }};box-shadow:0 2px 8px rgba(30,60,140,.05)">{{ ch.label }}</div>
+  </sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;padding:14px 20px 28px">
+  <sc-for list="{{ filtered }}" as="r" hint-placeholder-count="5">
+    <div onClick="{{ r.open }}" style="background:#fff;border-radius:18px;padding:12px 14px;display:flex;align-items:center;gap:14px;cursor:pointer;box-shadow:0 4px 14px rgba(30,60,140,.05)">
+      <div style="width:60px;height:40px;border-radius:8px;flex-shrink:0;background:{{ r.bg }};box-shadow:0 4px 10px rgba(15,35,90,.15)"></div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:14.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</div>
+        <div style="font-size:12.5px;color:#5B6B90;margin-top:2px">{{ r.catLabel }} · {{ r.short }}</div>
+      </div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9AA6C0" style="stroke-width:2.2;stroke-linecap:round"><path d="M9 6l6 6-6 6"></path></svg>
+    </div>
+  </sc-for>
+  <sc-if value="{{ noFiltered }}"><div style="text-align:center;color:#5B6B90;font-size:14px;padding:40px 0">Aucune carte dans cette catégorie.</div></sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ isSearch }}" hint-placeholder-val="{{ false }}">
+<div style="padding:8px 22px 0">
+  <div style="font-size:26px;font-weight:800;letter-spacing:-.01em">Recherche</div>
+  <div style="margin-top:16px;height:48px;border-radius:16px;background:#fff;display:flex;align-items:center;gap:10px;padding:0 14px;box-shadow:0 4px 14px rgba(30,60,140,.06);color:#5B6B90">
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:2;stroke-linecap:round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+    <input value="{{ query }}" onChange="{{ onQuery }}" placeholder="Nom, catégorie, numéro…" style="flex:1;border:0;outline:0;background:transparent;font-size:15px;color:#0F1B3D;height:100%">
+  </div>
+  <div style="font-size:13px;font-weight:600;color:#5B6B90;margin:22px 2px 10px">{{ searchLabel }}</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;padding:0 20px 28px">
+  <sc-for list="{{ results }}" as="r" hint-placeholder-count="4">
+    <div onClick="{{ r.open }}" style="background:#fff;border-radius:18px;padding:12px 14px;display:flex;align-items:center;gap:14px;cursor:pointer;box-shadow:0 4px 14px rgba(30,60,140,.05)">
+      <div style="width:60px;height:40px;border-radius:8px;flex-shrink:0;background:{{ r.bg }};box-shadow:0 4px 10px rgba(15,35,90,.15)"></div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:14.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ r.name }}</div>
+        <div style="font-size:12.5px;color:#5B6B90;margin-top:2px">{{ r.catLabel }} · {{ r.short }}</div>
+      </div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9AA6C0" style="stroke-width:2.2;stroke-linecap:round"><path d="M9 6l6 6-6 6"></path></svg>
+    </div>
+  </sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{ isProfile }}" hint-placeholder-val="{{ false }}">
+<div style="padding:8px 22px 0">
+  <div style="font-size:26px;font-weight:800;letter-spacing:-.01em">Profil</div>
+  <div style="margin-top:18px;background:#fff;border-radius:22px;padding:18px;display:flex;align-items:center;gap:14px;box-shadow:0 4px 14px rgba(30,60,140,.06)">
+    <div style="width:58px;height:58px;border-radius:50%;background:linear-gradient(145deg,#3B82FF,#0B3FD1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700">{{ initials }}</div>
+    <div style="min-width:0">
+      <div style="font-size:16px;font-weight:700">{{ holder }}</div>
+      <div style="font-size:13px;color:#5B6B90;margin-top:3px">{{ cardsCountLabel }}</div>
+    </div>
+  </div>
+  <div style="font-size:13px;font-weight:600;color:#5B6B90;margin:24px 4px 10px">Sécurité</div>
+  <div style="background:#fff;border-radius:20px;box-shadow:0 4px 14px rgba(30,60,140,.06);overflow:hidden">
+    <div onClick="{{ toggleFace }}" style="display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer">
+      <div style="flex:1;font-size:14.5px;font-weight:600">Déverrouillage Face ID</div>
+      <div style="width:50px;height:30px;border-radius:15px;padding:3px;display:flex;transition:background .2s;background:{{ faceBg }};justify-content:{{ faceJustify }}"><div style="width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.2)"></div></div>
+    </div>
+    <div style="height:1px;background:#EEF1F6;margin-left:16px"></div>
+    <div onClick="{{ toggleNotif }}" style="display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer">
+      <div style="flex:1;font-size:14.5px;font-weight:600">Rappels d'expiration</div>
+      <div style="width:50px;height:30px;border-radius:15px;padding:3px;display:flex;transition:background .2s;background:{{ notifBg }};justify-content:{{ notifJustify }}"><div style="width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.2)"></div></div>
+    </div>
+  </div>
+  <div style="font-size:13px;font-weight:600;color:#5B6B90;margin:24px 4px 10px">Préférences</div>
+  <div style="background:#fff;border-radius:20px;box-shadow:0 4px 14px rgba(30,60,140,.06);overflow:hidden">
+    <div style="display:flex;align-items:center;padding:14px 16px"><div style="flex:1;font-size:14.5px;font-weight:600">Langue</div><div style="font-size:14px;color:#5B6B90">Français</div></div>
+    <div style="height:1px;background:#EEF1F6;margin-left:16px"></div>
+    <div style="display:flex;align-items:center;padding:14px 16px"><div style="flex:1;font-size:14.5px;font-weight:600">Aide et assistance</div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9AA6C0" style="stroke-width:2.2;stroke-linecap:round"><path d="M9 6l6 6-6 6"></path></svg></div>
+  </div>
+  <div style="margin:20px 0 28px;height:50px;border-radius:16px;background:#fff;color:#E5484D;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(30,60,140,.06);cursor:pointer">Se déconnecter</div>
+</div>
+</sc-if>
+</div>
+
+<div style="flex-shrink:0;display:grid;grid-template-columns:repeat(4,1fr);padding:10px 8px 30px;background:rgba(255,255,255,.92);border-top:1px solid #E9EDF4">
+  <div onClick="{{ tabHome }}" style="display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;color:{{ cHome }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M3 10.6 12 3.5l9 7.1V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg><div style="font-size:11.5px;font-weight:600">Accueil</div></div>
+  <div onClick="{{ tabCards }}" style="display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;color:{{ cCards }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:1.9;stroke-linecap:round"><rect x="3" y="5" width="18" height="14" rx="2.5"></rect><path d="M3 10h18M7 15h4"></path></svg><div style="font-size:11.5px;font-weight:600">Cartes</div></div>
+  <div onClick="{{ tabSearch }}" style="display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;color:{{ cSearch }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:2;stroke-linecap:round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg><div style="font-size:11.5px;font-weight:600">Recherche</div></div>
+  <div onClick="{{ tabProfile }}" style="display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;color:{{ cProfile }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:1.9;stroke-linecap:round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"></path></svg><div style="font-size:11.5px;font-weight:600">Profil</div></div>
+</div>
+
+<sc-if value="{{ hasDetail }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeDetail }}" style="position:absolute;inset:0;z-index:60;background:rgba(10,20,50,.38);display:flex;align-items:flex-end">
+  <div onClick="{{ stop }}" style="width:100%;background:#F6F8FC;border-radius:28px 28px 0 0;padding:10px 20px 34px">
+    <div style="width:40px;height:5px;border-radius:3px;background:#CBD3E1;margin:0 auto 16px"></div>
+    <div style="height:214px;border-radius:22px;padding:22px;display:flex;flex-direction:column;background:{{ d.bg }};color:{{ d.fg }};box-shadow:0 18px 36px rgba(15,35,90,.25)">
+      <div style="font-size:19px;font-weight:700">{{ d.name }}</div>
+      <div style="font-size:12px;opacity:.75;margin-top:3px">{{ d.sub }}</div>
+      <div style="flex:1;display:flex;align-items:center;font-size:19px;font-weight:600;letter-spacing:.1em">{{ d.numShown }}</div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:10px">
+        <div><div style="font-size:10.5px;opacity:.7">{{ d.expLabel }}</div><div style="font-size:14px;font-weight:600">{{ d.exp }}</div></div>
+        <div style="font-size:12.5px;font-weight:600;text-align:right">{{ d.holder }}</div>
+      </div>
+    </div>
+    <div style="margin-top:18px;background:#fff;border-radius:18px;overflow:hidden">
+      <div style="display:flex;align-items:center;padding:13px 16px;gap:10px"><div style="flex:1;font-size:13.5px;color:#5B6B90">Numéro</div><div style="font-size:14px;font-weight:600;letter-spacing:.04em">{{ d.numShown }}</div><div onClick="{{ toggleNum }}" style="font-size:13px;font-weight:700;color:#1F5BFF;cursor:pointer;padding-left:6px">{{ numToggleLabel }}</div></div>
+      <div style="height:1px;background:#EEF1F6;margin-left:16px"></div>
+      <div style="display:flex;align-items:center;padding:13px 16px"><div style="flex:1;font-size:13.5px;color:#5B6B90">Catégorie</div><div style="font-size:14px;font-weight:600">{{ d.catLabel }}</div></div>
+      <div style="height:1px;background:#EEF1F6;margin-left:16px"></div>
+      <div style="display:flex;align-items:center;padding:13px 16px"><div style="flex:1;font-size:13.5px;color:#5B6B90">{{ d.expLabel }}</div><div style="font-size:14px;font-weight:600;color:{{ d.expColor }}">{{ d.exp }}</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px">
+      <div onClick="{{ shareCard }}" style="height:50px;border-radius:16px;background:#1F5BFF;color:#fff;font-size:14.5px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer">Partager</div>
+      <div onClick="{{ deleteCard }}" style="height:50px;border-radius:16px;background:#fff;color:#E5484D;font-size:14.5px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer">Supprimer</div>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isAdd }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeSheet }}" style="position:absolute;inset:0;z-index:60;background:rgba(10,20,50,.38);display:flex;align-items:flex-end">
+  <div onClick="{{ stop }}" style="width:100%;background:#F6F8FC;border-radius:28px 28px 0 0;padding:10px 20px 34px">
+    <div style="width:40px;height:5px;border-radius:3px;background:#CBD3E1;margin:0 auto 16px"></div>
+    <div style="font-size:20px;font-weight:800">Ajouter une carte</div>
+    <div style="font-size:13px;font-weight:600;color:#5B6B90;margin:18px 2px 8px">Catégorie</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <sc-for list="{{ addCats }}" as="ac" hint-placeholder-count="6">
+        <div onClick="{{ ac.onClick }}" style="height:34px;padding:0 13px;border-radius:17px;display:flex;align-items:center;font-size:13px;font-weight:600;cursor:pointer;background:{{ ac.bg }};color:{{ ac.fg }}">{{ ac.label }}</div>
+      </sc-for>
+    </div>
+    <div style="font-size:13px;font-weight:600;color:#5B6B90;margin:18px 2px 8px">Nom de la carte</div>
+    <input value="{{ addName }}" onChange="{{ onAddName }}" placeholder="Ex. Carte Orange Money" style="width:100%;height:48px;border-radius:14px;border:1px solid #E1E6EF;background:#fff;padding:0 14px;font-size:15px;color:#0F1B3D;outline:0">
+    <div style="display:grid;grid-template-columns:1.6fr 1fr;gap:10px;margin-top:12px">
+      <input value="{{ addNum }}" onChange="{{ onAddNum }}" placeholder="Numéro" inputmode="numeric" style="width:100%;height:48px;border-radius:14px;border:1px solid #E1E6EF;background:#fff;padding:0 14px;font-size:15px;color:#0F1B3D;outline:0">
+      <input value="{{ addExp }}" onChange="{{ onAddExp }}" placeholder="MM/AA" style="width:100%;height:48px;border-radius:14px;border:1px solid #E1E6EF;background:#fff;padding:0 14px;font-size:15px;color:#0F1B3D;outline:0">
+    </div>
+    <div onClick="{{ submitAdd }}" style="margin-top:20px;height:52px;border-radius:16px;color:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;background:{{ addBtnBg }}">Ajouter la carte</div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isScan }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;inset:0;z-index:70;background:#0A1024;color:#fff;display:flex;flex-direction:column;align-items:center;padding:64px 24px 44px">
+  <div style="align-self:stretch;display:flex;justify-content:space-between;align-items:center">
+    <div style="font-size:17px;font-weight:700">Scanner une carte</div>
+    <div onClick="{{ closeSheet }}" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" style="stroke-width:2.4;stroke-linecap:round"><path d="M6 6l12 12M18 6 6 18"></path></svg></div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;width:100%">
+    <div style="position:relative;width:310px;height:196px;border-radius:20px;background:rgba(255,255,255,.04)">
+      <div style="position:absolute;top:0;left:0;width:36px;height:36px;border-top:4px solid {{ scanColor }};border-left:4px solid {{ scanColor }};border-radius:20px 0 0 0"></div>
+      <div style="position:absolute;top:0;right:0;width:36px;height:36px;border-top:4px solid {{ scanColor }};border-right:4px solid {{ scanColor }};border-radius:0 20px 0 0"></div>
+      <div style="position:absolute;bottom:0;left:0;width:36px;height:36px;border-bottom:4px solid {{ scanColor }};border-left:4px solid {{ scanColor }};border-radius:0 0 0 20px"></div>
+      <div style="position:absolute;bottom:0;right:0;width:36px;height:36px;border-bottom:4px solid {{ scanColor }};border-right:4px solid {{ scanColor }};border-radius:0 0 20px 0"></div>
+      <sc-if value="{{ scanDone }}">
+        <div style="position:absolute;inset:16px;border-radius:14px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(135deg,#7C5CFF,#4B2BC9)">
+          <div style="font-size:15px;font-weight:700">Carte Fidélité Plus</div>
+          <div style="font-size:14px;letter-spacing:.08em;font-weight:600">•••• 7710</div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ scanning }}"><div style="position:absolute;left:20px;right:20px;top:50%;height:2px;background:#5B8CFF;box-shadow:0 0 14px #5B8CFF"></div></sc-if>
+    </div>
+    <div style="text-align:center">
+      <div style="font-size:18px;font-weight:700">{{ scanTitle }}</div>
+      <div style="font-size:14px;color:#B7C2DC;margin-top:6px">{{ scanSub }}</div>
+    </div>
+  </div>
+  <sc-if value="{{ scanDone }}">
+    <div onClick="{{ saveScan }}" style="align-self:stretch;height:52px;border-radius:16px;background:#1F5BFF;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer">Enregistrer la carte</div>
+  </sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+<div style="position:absolute;left:20px;right:20px;top:60px;z-index:90;background:#0F1B3D;color:#fff;border-radius:16px;padding:14px 16px;font-size:14px;font-weight:600;box-shadow:0 12px 30px rgba(10,20,50,.3)">{{ toast }}</div>
+</sc-if>
+
+</div>
+</x-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;prenom&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Wilfride&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;carousel&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;3D&quot;,&quot;Plat&quot;],&quot;default&quot;:&quot;3D&quot;,&quot;tsType&quot;:&quot;'3D'|'Plat'&quot;},&quot;showReminder&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  scrollRef = React.createRef();
+  state = { tab: 'home', active: 1, filter: 'all', query: '', detailId: null, showNum: false, sheet: null, scanStage: 0, toast: null, faceId: true, notif: true, cards: this.initialCards(), addCat: 'bancaire', addName: '', addNum: '', addExp: '', reminderDismissed: false };
+
+  catMeta() {
+    return {
+      identite: ['Identité', 'linear-gradient(135deg,#F7F9FC,#C9D1DE)', '#22304F'],
+      bancaire: ['Bancaire', 'linear-gradient(135deg,#2B62F0,#0B2A8A)', '#fff'],
+      transport: ['Transport', 'linear-gradient(135deg,#1FB57F,#0B6B4A)', '#fff'],
+      assurance: ['Assurance', 'linear-gradient(135deg,#EF5A5F,#A3122A)', '#fff'],
+      education: ['Éducation', 'linear-gradient(135deg,#FFC65C,#E0892E)', '#3B2506'],
+      professionnel: ['Professionnel', 'linear-gradient(135deg,#46557A,#1C2540)', '#fff'],
+      sante: ['Santé', 'linear-gradient(135deg,#22C3B2,#0E7C74)', '#fff'],
+      fidelite: ['Fidélité', 'linear-gradient(135deg,#8E72FF,#4B2BC9)', '#fff'],
+      autre: ['Autre', 'linear-gradient(135deg,#8A97B3,#4D5A78)', '#fff'],
+    };
+  }
+
+  initialCards() {
+    return [
+      { id: 'visa', cat: 'bancaire', name: 'Visa Classic', sub: 'Ecobank', num: '4532 8810 2674 1937', exp: '11/27', brand: 'visa', bg: 'linear-gradient(140deg,#2F6BFF 0%,#1240C8 55%,#0B2A8A 100%)' },
+      { id: 'mc', cat: 'bancaire', name: 'Mastercard', sub: 'Orabank', num: '5412 7534 2290 4821', exp: '08/29', brand: 'mc', bg: 'radial-gradient(130% 90% at 95% 115%,rgba(64,120,230,.6),transparent 55%),linear-gradient(150deg,#0F1A36 0%,#0A1328 100%)' },
+      { id: 'cni', cat: 'identite', name: "Carte d'identité", sub: 'République Togolaise', num: 'N° 0912 4402', exp: '14/03/2031', expLabel: "Valide jusqu'au", brand: 'id' },
+      { id: 'ass', cat: 'assurance', name: 'Assurance maladie', sub: 'Couverture famille', num: 'POL 7781 2205', exp: '03/11/2026', expLabel: 'Expire le', expSoon: true },
+      { id: 'bus', cat: 'transport', name: 'Abonnement bus', sub: 'Lomé — mensuel', num: 'TR 2290 0451', exp: '31/10/2026' },
+      { id: 'etu', cat: 'education', name: 'Carte étudiant', sub: 'Université de Lomé', num: 'ETU 21 0384', exp: '09/2027' },
+      { id: 'pro', cat: 'professionnel', name: 'Badge professionnel', sub: 'Accès bureaux', num: 'EMP 00482', exp: '12/2027' },
+      { id: 'sante', cat: 'sante', name: 'Carnet de santé', sub: 'Groupe sanguin O+', num: 'SAN 4410 9921', exp: '—' },
+      { id: 'fid', cat: 'fidelite', name: 'Carte fidélité', sub: '1 240 points', num: 'FID 3312 0098', exp: '06/2027' },
+    ];
+  }
+
+  full(c) {
+    const m = this.catMeta()[c.cat] || this.catMeta().autre;
+    const last = c.num.replace(/\s/g, '').slice(-4);
+    const isBank = c.cat === 'bancaire';
+    return {
+      ...c, catLabel: m[0], bg: c.bg || m[1], fg: c.fg || m[2],
+      masked: isBank ? '•••• ' + last : c.num.replace(/\d(?=\d{4})/g, '•'),
+      short: '•••• ' + last,
+      expLabel: c.expLabel || (isBank ? 'Expire le' : 'Valide jusqu\u2019au'),
+      holder: this.holder(), isBank, isMc: c.brand === 'mc', isVisa: c.brand === 'visa', isId: c.brand === 'id',
+      backBank: isBank, backId: c.brand === 'id', backCode: !isBank && c.brand !== 'id',
+      cvv: '•••',
+      mrz1: ('IDTGO' + c.num.replace(/\D/g, '') + '<'.repeat(30)).slice(0, 30),
+      mrz2: (this.holder().toUpperCase().replace(/\s+/g, '<') + '<'.repeat(30)).slice(0, 30),
+    };
+  }
+
+  holder() { return 'KAZALO Esso Donda ' + (this.props.prenom ?? 'Wilfride'); }
+  flash(msg) { clearTimeout(this._t); this.setState({ toast: msg }); this._t = setTimeout(() => this.setState({ toast: null }), 2400); }
+  go(tab, extra) { this.setState({ tab, ...extra }); if (this.scrollRef.current) this.scrollRef.current.scrollTop = 0; }
+  open(id) { this.setState({ detailId: id, showNum: false }); }
+  componentWillUnmount() { clearTimeout(this._t); clearTimeout(this._s); }
+
+  renderVals() {
+    const s = this.state, P = '#1F5BFF', M = '#8A96B0';
+    const cards = s.cards.map(c => this.full(c));
+    const car = cards.slice(0, 4);
+    const active = Math.min(s.active, car.length - 1);
+    const flat = (this.props.carousel ?? '3D') === 'Plat';
+    const carousel = car.map((c, i) => {
+      const d = i - active, a = Math.abs(d);
+      return { ...c,
+        transform: flat ? `translateX(${d * 262}px) scale(${d ? 0.9 : 1})` : `translateX(${d * 236}px) scale(${d ? 0.84 : 1}) rotateY(${-d * 22}deg)`,
+        z: 10 - a, opacity: a > 1 ? 0 : 1, pe: a > 1 ? 'none' : 'auto',
+        flip: d === 0 && s.flipped ? 'rotateX(-180deg)' : 'rotateX(0deg)',
+        onClick: () => { if (this._swiped) { this._swiped = false; return; } d === 0 ? (s.flipped ? this.setState({ flipped: false }) : this.open(c.id)) : this.setState({ active: i, flipped: false }); },
+      };
+    });
+    const dots = car.map((c, i) => ({ w: i === active ? '18px' : '7px', bg: i === active ? P : '#CFD7E6', onClick: () => this.setState({ active: i, flipped: false }) }));
+    const meta = this.catMeta();
+    const withOpen = arr => arr.map(c => ({ ...c, open: () => this.open(c.id) }));
+    const filtered = withOpen(s.filter === 'all' ? cards : cards.filter(c => c.cat === s.filter));
+    const present = Object.keys(meta).filter(k => cards.some(c => c.cat === k) || k === s.filter);
+    const chips = [['all', 'Toutes'], ...present.map(k => [k, meta[k][0]])].map(([k, l]) => ({ label: l, bg: s.filter === k ? '#0F1B3D' : '#fff', fg: s.filter === k ? '#fff' : '#33405E', onClick: () => this.setState({ filter: k }) }));
+    const q = s.query.trim().toLowerCase();
+    const results = withOpen(q ? cards.filter(c => (c.name + ' ' + c.catLabel + ' ' + c.sub + ' ' + c.num).toLowerCase().includes(q)) : cards);
+    const cat = {}; Object.keys(meta).forEach(k => cat[k] = () => this.go('cards', { filter: k }));
+    const det = cards.find(c => c.id === s.detailId);
+    const first = this.props.prenom ?? 'Wilfride';
+    const showReminder = (this.props.showReminder ?? true) && !s.reminderDismissed && cards.some(c => c.id === 'ass');
+    const n = cards.length;
+    const addCats = Object.keys(meta).map(k => ({ label: meta[k][0], bg: s.addCat === k ? P : '#fff', fg: s.addCat === k ? '#fff' : '#33405E', onClick: () => this.setState({ addCat: k }) }));
+    const stop = e => e.stopPropagation();
+    return {
+      scrollRef: this.scrollRef, stop,
+      isHome: s.tab === 'home', isCards: s.tab === 'cards', isSearch: s.tab === 'search', isProfile: s.tab === 'profile',
+      cHome: s.tab === 'home' ? P : M, cCards: s.tab === 'cards' ? P : M, cSearch: s.tab === 'search' ? P : M, cProfile: s.tab === 'profile' ? P : M,
+      tabHome: () => this.go('home'), tabCards: () => this.go('cards'), tabSearch: () => this.go('search'), tabProfile: () => this.go('profile'),
+      goSearch: () => this.go('search'), goProfile: () => this.go('profile'), goAll: () => this.go('cards', { filter: 'all' }), goDocs: () => this.go('cards', { filter: 'identite' }),
+      firstName: first, holder: this.holder(), initials: 'K' + first.charAt(0).toUpperCase(),
+      carousel, dots, cat, chips, filtered, noFiltered: filtered.length === 0, results,
+      flipHint: s.flipped ? 'Glissez vers le haut pour revoir le recto' : 'Glissez vers le bas pour voir le verso',
+      swipeStart: e => { this._x = e.clientX; this._y = e.clientY; this._down = true; this._swiped = false; },
+      swipeMove: e => { if (this._down && !this._cap && Math.hypot(e.clientX - this._x, e.clientY - this._y) > 10) { this._cap = true; try { e.currentTarget.setPointerCapture(e.pointerId); } catch (_) {} } },
+      swipeCancel: () => { this._down = false; this._cap = false; },
+      swipeEnd: e => {
+        const dx = e.clientX - (this._x ?? e.clientX), dy = e.clientY - (this._y ?? e.clientY);
+        this._down = false; this._cap = false;
+        if (Math.abs(dy) > 35 && Math.abs(dy) > Math.abs(dx)) { this._swiped = true; this.setState({ flipped: dy > 0 ? !s.flipped : false }); }
+        else if (Math.abs(dx) > 40) { this._swiped = true; this.setState({ flipped: false, active: Math.max(0, Math.min(car.length - 1, active + (dx < 0 ? 1 : -1))) }); }
+      },
+      cardsCountLabel: n + (n > 1 ? ' cartes enregistrées' : ' carte enregistrée'),
+      query: s.query, onQuery: e => this.setState({ query: e.target.value }),
+      searchLabel: q ? results.length + ' résultat' + (results.length > 1 ? 's' : '') : 'Toutes vos cartes',
+      showReminder, openReminder: () => showReminder ? this.open('ass') : this.flash('Aucun nouveau rappel.'),
+      hasDetail: !!det,
+      d: det ? { ...det, numShown: s.showNum ? det.num : det.masked, expColor: det.expSoon ? '#E5484D' : '#0F1B3D' } : {},
+      numToggleLabel: s.showNum ? 'Masquer' : 'Afficher',
+      toggleNum: () => this.setState({ showNum: !s.showNum }),
+      closeDetail: () => this.setState({ detailId: null }),
+      shareCard: () => { this.setState({ detailId: null }); this.flash('Lien de partage sécurisé copié.'); },
+      deleteCard: () => { const nm = det.name; this.setState(st => ({ cards: st.cards.filter(c => c.id !== st.detailId), detailId: null, active: Math.min(st.active, Math.max(0, Math.min(3, st.cards.length - 2))) })); this.flash(nm + ' supprimée.'); },
+      toggleFace: () => this.setState({ faceId: !s.faceId }), faceBg: s.faceId ? '#22C55E' : '#D5DBE6', faceJustify: s.faceId ? 'flex-end' : 'flex-start',
+      toggleNotif: () => this.setState({ notif: !s.notif }), notifBg: s.notif ? '#22C55E' : '#D5DBE6', notifJustify: s.notif ? 'flex-end' : 'flex-start',
+      isAdd: s.sheet === 'add', addCats, addName: s.addName, addNum: s.addNum, addExp: s.addExp,
+      onAddName: e => this.setState({ addName: e.target.value }), onAddNum: e => this.setState({ addNum: e.target.value }), onAddExp: e => this.setState({ addExp: e.target.value }),
+      addBtnBg: s.addName.trim() ? P : '#A9B8DA',
+      openAdd: () => this.setState({ sheet: 'add', addName: '', addNum: '', addExp: '' }),
+      closeSheet: () => { clearTimeout(this._s); this.setState({ sheet: null, scanStage: 0 }); },
+      submitAdd: () => {
+        if (!s.addName.trim()) return;
+        const num = s.addNum.trim() || String(Math.floor(1000 + Math.random() * 9000));
+        const c = { id: 'c' + Date.now(), cat: s.addCat, name: s.addName.trim(), sub: meta[s.addCat][0], num, exp: s.addExp.trim() || '—' };
+        this.setState(st => ({ cards: [...st.cards, c], sheet: null }));
+        this.flash(c.name + ' ajoutée à votre portefeuille.');
+      },
+      isScan: s.sheet === 'scan', scanning: s.scanStage === 1, scanDone: s.scanStage === 2,
+      scanColor: s.scanStage === 2 ? '#22C55E' : '#fff',
+      scanTitle: s.scanStage === 2 ? 'Carte détectée' : 'Placez votre carte dans le cadre',
+      scanSub: s.scanStage === 2 ? 'Carte Fidélité Plus · •••• 7710' : 'La détection est automatique.',
+      openScan: () => { this.setState({ sheet: 'scan', scanStage: 1 }); clearTimeout(this._s); this._s = setTimeout(() => this.setState({ scanStage: 2 }), 2200); },
+      saveScan: () => { this.setState(st => ({ cards: [...st.cards, { id: 'c' + Date.now(), cat: 'fidelite', name: 'Carte Fidélité Plus', sub: 'Scannée', num: 'FID 5520 7710', exp: '12/2028' }], sheet: null, scanStage: 0 })); this.flash('Carte Fidélité Plus enregistrée.'); },
+      hasToast: !!s.toast, toast: s.toast,
+    };
+  }
+}
+</script>
+</body>
+</html>

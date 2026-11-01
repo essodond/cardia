@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="position:relative;width:100%;height:100%;perspective:1400px;font-family:'Plus Jakarta Sans',system-ui,sans-serif">
+<div style="position:absolute;inset:0;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.3,.7,.2,1);transform:{{ flipT }}">
+
+<div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:visibility 0s linear .3s;border-radius:{{ rad }};box-shadow:{{ shadow }};visibility:{{ frontVis }}">
+<div style="position:absolute;left:0;top:0;width:320px;overflow:hidden;border-radius:14px;transform-origin:0 0;height:{{ baseH }};transform:{{ scaleT }};background:{{ c.bg }};color:{{ c.ink }}">
+
+<sc-if value="{{ c.isId }}">
+  <div style="position:absolute;inset:0;background:repeating-radial-gradient(circle at 88% 120%,transparent 0 7px,{{ c.soft }} 7px 8px)"></div>
+  <div style="position:absolute;left:-20px;top:46px;font-size:96px;font-weight:800;letter-spacing:.08em;opacity:.05;transform:rotate(-14deg);white-space:nowrap">DEMO</div>
+  <div style="position:relative;height:34px;color:#fff;display:flex;align-items:center;gap:8px;padding:0 10px;background:{{ c.band }}">
+    <dc-import name="Flag" code="{{ c.country }}" style="width:21px;height:14px;flex-shrink:0" hint-size="21px,14px"></dc-import>
+    <div style="flex:1;min-width:0">
+      <div style="font-size:8.5px;font-weight:800;letter-spacing:.07em;white-space:nowrap">{{ c.state }}</div>
+      <div style="font-size:6.5px;opacity:.85;margin-top:1px">{{ c.motto }}</div>
+    </div>
+    <div style="font-size:5.8px;font-weight:800;letter-spacing:.12em;padding:2px 5px;border:1px solid rgba(255,255,255,.6);border-radius:3px">CEDEAO</div>
+  </div>
+  <div style="position:relative;padding:6px 12px 0;display:flex;align-items:baseline;gap:8px;white-space:nowrap">
+    <div style="font-size:9.5px;font-weight:800;letter-spacing:.06em;color:{{ c.band }}">{{ c.title }}</div>
+    <div style="font-size:6.5px;font-weight:600;opacity:.55;letter-spacing:.06em">{{ c.titleAlt }}</div>
+  </div>
+  <div style="position:absolute;left:12px;right:12px;top:62px;display:flex;gap:12px">
+    <div style="position:relative;width:66px;height:84px;border-radius:6px;overflow:hidden;background:linear-gradient(180deg,#DFE5EE,#C3CDDA);flex-shrink:0">
+      <div style="position:absolute;left:19px;top:16px;width:28px;height:28px;border-radius:50%;background:#8E9BB0"></div>
+      <div style="position:absolute;left:5px;bottom:-20px;width:56px;height:46px;border-radius:50%;background:#8E9BB0"></div>
+      <div style="position:absolute;left:0;right:0;bottom:3px;text-align:center;font-size:6px;font-weight:800;letter-spacing:.18em;color:#fff">DEMO</div>
+    </div>
+    <div style="flex:1;min-width:0;display:grid;grid-template-columns:1fr 1fr;column-gap:8px;row-gap:5px;align-content:start">
+      <sc-for list="{{ c.ff }}" as="f" hint-placeholder-count="5">
+        <div style="min-width:0;grid-column:{{ f.col }}">
+          <div style="font-size:5.8px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;opacity:.6;white-space:nowrap">{{ f.l }}</div>
+          <div style="font-size:9px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ f.v }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <sc-if value="{{ c.chip }}">
+    <div style="position:absolute;right:14px;bottom:20px;width:34px;height:26px;border-radius:5px;background:linear-gradient(135deg,#F3DA94,#C79A3C);box-shadow:inset 0 0 0 1px rgba(120,80,10,.35)"><div style="position:absolute;left:11px;right:11px;top:0;bottom:0;border-left:1px solid rgba(110,70,10,.35);border-right:1px solid rgba(110,70,10,.35)"></div><div style="position:absolute;top:9px;bottom:9px;left:0;right:0;border-top:1px solid rgba(110,70,10,.35);border-bottom:1px solid rgba(110,70,10,.35)"></div></div>
+  </sc-if>
+  <div style="position:absolute;left:12px;bottom:7px;font-family:ui-monospace,Menlo,monospace;font-size:5.5px;letter-spacing:.08em;opacity:.55;white-space:nowrap">DEMO · CARDIA · {{ c.tplId }}</div>
+</sc-if>
+
+<sc-if value="{{ c.isTgCni }}">
+  <div style="position:absolute;inset:0;background:radial-gradient(120% 90% at 30% 20%,rgba(255,255,255,.55),transparent 60%),repeating-radial-gradient(circle at 70% 60%,transparent 0 6px,{{ c.soft }} 6px 7px)"></div>
+  <div style="position:absolute;left:40px;top:58px;font-size:92px;font-weight:800;letter-spacing:.08em;opacity:.045;transform:rotate(-14deg);white-space:nowrap">DEMO</div>
+  <div style="position:absolute;left:12px;top:8px;right:60px">
+    <div style="font-size:14.5px;font-weight:800;letter-spacing:.015em;color:#2E9E4F;line-height:1;white-space:nowrap">REPUBLIQUE TOGOLAISE</div>
+    <div style="font-size:6.4px;font-weight:800;letter-spacing:.04em;color:#2E9E4F;margin-top:2px;white-space:nowrap">MINISTERE CHARGE DE LA SECURITE</div>
+    <div style="font-family:Georgia,'Times New Roman',serif;font-size:11px;font-weight:700;letter-spacing:.02em;color:#C8373A;margin-top:1px;white-space:nowrap">CARTE NATIONALE D'IDENTITE</div>
+  </div>
+  <div style="position:absolute;right:12px;top:7px;width:40px;height:46px;border-radius:50%;border:1.2px solid #2E9E4F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#2E9E4F">
+    <svg width="14" height="14" viewBox="-1 -1 2 2"><path d="M0-1L.225-.309L.951-.309L.363.118L.588.809L0 .382L-.588.809L-.363.118L-.951-.309L-.225-.309Z" fill="none" stroke="currentColor" style="stroke-width:.12"></path></svg>
+    <div style="font-size:6px;font-weight:800;letter-spacing:.1em">DEMO</div>
+  </div>
+  <div style="position:absolute;left:12px;top:52px;width:76px;height:96px;overflow:hidden;background:linear-gradient(180deg,#E6E2D6,#CFC9B9)">
+    <div style="position:absolute;left:23px;top:18px;width:30px;height:32px;border-radius:50%;background:#8F8A7C"></div>
+    <div style="position:absolute;left:6px;bottom:-24px;width:64px;height:54px;border-radius:50%;background:#8F8A7C"></div>
+    <div style="position:absolute;left:0;right:0;bottom:3px;text-align:center;font-size:6px;font-weight:800;letter-spacing:.18em;color:#fff">DEMO</div>
+  </div>
+  <div style="position:absolute;left:98px;right:10px;top:54px;display:grid;grid-template-columns:44px minmax(0,1fr);column-gap:4px;row-gap:1.5px;align-items:baseline;font-family:Arial,Helvetica,sans-serif;font-size:6.8px;color:#2A2A2A">
+    <div>Numéro:</div><div style="font-family:ui-monospace,Menlo,monospace;font-size:9.6px;letter-spacing:.02em;color:#141414">{{ c.tg.num }}</div>
+    <div>Nom:</div><div style="font-family:ui-monospace,Menlo,monospace;font-size:8.4px;color:#141414;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.tg.nom }}</div>
+    <div>Prénom:</div><div style="font-family:ui-monospace,Menlo,monospace;font-size:8.4px;color:#141414;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.tg.prenom }}</div>
+    <div style="margin-top:5px">Né le:</div><div style="margin-top:5px;display:flex;justify-content:space-between;align-items:baseline;gap:6px"><div style="font-family:ui-monospace,Menlo,monospace;font-size:9.6px;color:#141414">{{ c.tg.ne }}</div><div style="font-size:6.8px;white-space:nowrap">Sexe: {{ c.tg.sexe }}</div></div>
+    <div>A:</div><div style="font-family:ui-monospace,Menlo,monospace;font-size:8.4px;color:#141414;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.tg.lieu }}</div>
+    <div>Profession:</div><div style="font-family:ui-monospace,Menlo,monospace;font-size:8.4px;color:#141414;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.tg.prof }}</div>
+    <div>Fait le:</div><div style="font-family:ui-monospace,Menlo,monospace;font-size:9.2px;color:#141414">{{ c.tg.fait }}</div>
+    <div>Expire le:</div><div style="font-family:ui-monospace,Menlo,monospace;font-size:9.2px;color:#141414">{{ c.tg.expire }}</div>
+  </div>
+  <div style="position:absolute;left:10px;right:10px;bottom:7px;height:36px;display:grid;grid-template-columns:1fr 1fr;gap:4px">
+    <div style="border:.8px solid #D7A3A0;border-radius:3px;padding:2px 5px;position:relative"><div style="font-family:Arial,Helvetica,sans-serif;font-size:5.4px;color:#B5605B">Signature du titulaire</div><div style="font-family:'Brush Script MT','Segoe Script',cursive;font-size:14px;line-height:1.1;color:#2B2B3A;margin-top:2px">{{ c.sigText }}</div></div>
+    <div style="border:.8px solid #D7A3A0;border-radius:3px;padding:2px 5px"><div style="font-family:Arial,Helvetica,sans-serif;font-size:5.4px;color:#B5605B">Signature de l'autorité</div><div style="font-size:8px;font-weight:800;letter-spacing:.2em;color:#B5605B;opacity:.7;margin-top:6px;text-align:center">DEMO · CARDIA</div></div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ c.isPassport }}">
+  <div style="position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 5px,{{ c.soft }} 5px 6px)"></div>
+  <div style="position:absolute;left:-10px;top:52px;font-size:100px;font-weight:800;letter-spacing:.08em;opacity:.05;transform:rotate(-14deg);white-space:nowrap">DEMO</div>
+  <div style="position:relative;height:30px;color:#fff;display:flex;align-items:center;gap:8px;padding:0 10px;background:{{ c.cover }}">
+    <dc-import name="Flag" code="{{ c.country }}" style="width:20px;height:13px;flex-shrink:0" hint-size="20px,13px"></dc-import>
+    <div style="flex:1;font-size:8.5px;font-weight:800;letter-spacing:.07em;white-space:nowrap">{{ c.state }}</div>
+    <div style="font-size:7px;font-weight:700;letter-spacing:.1em;color:{{ c.gold }}">CEDEAO · ECOWAS</div>
+  </div>
+  <div style="position:relative;padding:6px 12px 0;display:flex;justify-content:space-between;align-items:baseline;white-space:nowrap">
+    <div style="font-size:9.5px;font-weight:800;letter-spacing:.08em;color:{{ c.cover }}">{{ c.title }}</div>
+    <div style="font-size:7px;font-weight:600;opacity:.7">Type {{ c.passType }} · {{ c.iso3 }} · N° {{ c.passNo }}</div>
+  </div>
+  <div style="position:absolute;left:12px;right:12px;top:58px;display:flex;gap:12px">
+    <div style="position:relative;width:72px;height:92px;border-radius:5px;overflow:hidden;background:linear-gradient(180deg,#E3E2DC,#C9C6BC);flex-shrink:0">
+      <div style="position:absolute;left:21px;top:17px;width:30px;height:30px;border-radius:50%;background:#99968A"></div>
+      <div style="position:absolute;left:6px;bottom:-22px;width:60px;height:50px;border-radius:50%;background:#99968A"></div>
+      <div style="position:absolute;left:0;right:0;bottom:3px;text-align:center;font-size:6px;font-weight:800;letter-spacing:.18em;color:#fff">DEMO</div>
+    </div>
+    <div style="flex:1;min-width:0;display:grid;grid-template-columns:1fr 1fr;column-gap:8px;row-gap:5px;align-content:start">
+      <sc-for list="{{ c.ff }}" as="f" hint-placeholder-count="5">
+        <div style="min-width:0;grid-column:{{ f.col }}">
+          <div style="font-size:5.6px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;opacity:.6;white-space:nowrap">{{ f.l }}</div>
+          <div style="font-size:8.8px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ f.v }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="position:absolute;left:0;right:0;bottom:0;padding:6px 12px 7px;background:rgba(255,255,255,.75);font-family:ui-monospace,Menlo,monospace;font-size:8.2px;letter-spacing:.8px;line-height:1.4;white-space:nowrap;overflow:hidden">{{ c.mrz1 }}<br>{{ c.mrz2 }}</div>
+</sc-if>
+
+<sc-if value="{{ c.isBank }}">
+  <div style="position:absolute;left:18px;right:18px;top:16px;display:flex;align-items:center;gap:8px">
+    <div style="font-size:12.5px;font-weight:700;letter-spacing:.01em;white-space:nowrap">{{ c.bankName }}</div>
+    <div style="font-size:5.8px;font-weight:800;letter-spacing:.14em;padding:2px 5px;border-radius:3px;background:rgba(255,255,255,.18)">DEMO</div>
+    <div style="flex:1"></div>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width:2;stroke-linecap:round;opacity:.9"><path d="M8 8.5a5 5 0 0 1 0 7"></path><path d="M12 6a9 9 0 0 1 0 12"></path><path d="M16 3.5a13 13 0 0 1 0 17"></path></svg>
+  </div>
+  <div style="position:absolute;left:22px;top:66px;width:42px;height:32px;border-radius:6px;background:linear-gradient(135deg,#F5DE9C,#C29638);box-shadow:inset 0 0 0 1px rgba(120,80,10,.35)"><div style="position:absolute;left:14px;right:14px;top:0;bottom:0;border-left:1px solid rgba(110,70,10,.4);border-right:1px solid rgba(110,70,10,.4)"></div><div style="position:absolute;top:11px;bottom:11px;left:0;right:0;border-top:1px solid rgba(110,70,10,.4);border-bottom:1px solid rgba(110,70,10,.4)"></div></div>
+  <div style="position:absolute;left:22px;top:112px;font-size:17px;font-weight:600;letter-spacing:.14em">•••• {{ c.last4 }}</div>
+  <div style="position:absolute;left:22px;bottom:16px">
+    <div style="font-size:6px;font-weight:600;letter-spacing:.1em;opacity:.7">EXP</div>
+    <div style="font-size:10px;font-weight:600;margin-bottom:6px">{{ c.exp }}</div>
+    <div style="font-size:9.5px;font-weight:600;letter-spacing:.09em">{{ c.holder }}</div>
+  </div>
+  <sc-if value="{{ c.isMc }}"><div style="position:absolute;right:18px;bottom:16px;display:flex"><div style="width:34px;height:34px;border-radius:50%;background:#EB001B"></div><div style="width:34px;height:34px;border-radius:50%;background:#F79E1B;margin-left:-14px;opacity:.92"></div></div></sc-if>
+  <sc-if value="{{ c.isVisa }}"><div style="position:absolute;right:18px;bottom:14px;font-size:27px;font-weight:800;font-style:italic;letter-spacing:.01em">VISA</div></sc-if>
+</sc-if>
+
+<sc-if value="{{ c.isMember }}">
+  <div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 9px,{{ c.soft }} 9px 10px)"></div>
+  <div style="position:relative;height:40px;display:flex;align-items:center;gap:8px;padding:0 14px;color:#fff;background:{{ c.band }}">
+    <dc-import name="Flag" code="{{ c.country }}" style="width:18px;height:12px;flex-shrink:0" hint-size="18px,12px"></dc-import>
+    <div style="flex:1;min-width:0;font-size:10.5px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.org }}</div>
+    <div style="font-size:6.5px;font-weight:800;letter-spacing:.12em;padding:3px 7px;border-radius:10px;background:rgba(255,255,255,.2);white-space:nowrap">{{ c.title }}</div>
+  </div>
+  <div style="position:absolute;left:14px;right:14px;top:54px;display:flex;gap:12px">
+    <sc-if value="{{ c.photo }}">
+      <div style="position:relative;width:60px;height:74px;border-radius:8px;overflow:hidden;background:linear-gradient(180deg,#DFE5EE,#C3CDDA);flex-shrink:0">
+        <div style="position:absolute;left:17px;top:13px;width:26px;height:26px;border-radius:50%;background:#8E9BB0"></div>
+        <div style="position:absolute;left:4px;bottom:-20px;width:52px;height:44px;border-radius:50%;background:#8E9BB0"></div>
+        <div style="position:absolute;left:0;right:0;bottom:3px;text-align:center;font-size:6px;font-weight:800;letter-spacing:.18em;color:#fff">DEMO</div>
+      </div>
+    </sc-if>
+    <div style="flex:1;min-width:0;display:grid;grid-template-columns:1fr 1fr;column-gap:10px;row-gap:7px;align-content:start">
+      <sc-for list="{{ c.ff }}" as="f" hint-placeholder-count="3">
+        <div style="min-width:0;grid-column:{{ f.col }}">
+          <div style="font-size:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;opacity:.65;white-space:nowrap">{{ f.l }}</div>
+          <div style="font-size:10.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ f.v }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="position:absolute;left:14px;right:14px;bottom:10px;display:flex;justify-content:space-between;font-size:6.5px;font-weight:700;letter-spacing:.08em;opacity:.65"><div>{{ c.catLabel }}</div><div>DEMO · CARDIA</div></div>
+</sc-if>
+
+<sc-if value="{{ c.isTicket }}">
+  <div style="position:absolute;inset:0;display:flex">
+    <div style="flex:1;min-width:0;padding:11px 14px;display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div style="font-size:9.5px;font-weight:800;color:{{ c.band }}">{{ c.org }}</div>
+        <div style="font-size:5.8px;font-weight:800;letter-spacing:.12em;padding:2px 5px;border-radius:3px;background:{{ c.soft }};color:{{ c.band }}">BILLET · DEMO</div>
+      </div>
+      <div style="flex:1;display:flex;align-items:center;gap:10px">
+        <div><div style="font-size:21px;font-weight:800;letter-spacing:.02em;line-height:1">{{ c.from }}</div><div style="font-size:6.5px;opacity:.6;margin-top:2px">{{ c.fromSub }}</div></div>
+        <div style="flex:1;height:1px;border-top:1.5px dashed {{ c.band }};position:relative;min-width:20px"></div>
+        <div style="text-align:right"><div style="font-size:21px;font-weight:800;letter-spacing:.02em;line-height:1">{{ c.to }}</div><div style="font-size:6.5px;opacity:.6;margin-top:2px">{{ c.toSub }}</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,auto);justify-content:space-between">
+        <div><div style="font-size:5.8px;font-weight:600;opacity:.55;letter-spacing:.06em">DATE</div><div style="font-size:9px;font-weight:700">{{ c.date }}</div></div>
+        <div><div style="font-size:5.8px;font-weight:600;opacity:.55;letter-spacing:.06em">DÉPART</div><div style="font-size:9px;font-weight:700">{{ c.time }}</div></div>
+        <div><div style="font-size:5.8px;font-weight:600;opacity:.55;letter-spacing:.06em">SIÈGE</div><div style="font-size:9px;font-weight:700">{{ c.seat }}</div></div>
+        <div><div style="font-size:5.8px;font-weight:600;opacity:.55;letter-spacing:.06em">CLASSE</div><div style="font-size:9px;font-weight:700">{{ c.cls }}</div></div>
+      </div>
+    </div>
+    <div style="width:0;border-left:1.5px dashed #C9D3E6;margin:8px 0"></div>
+    <div style="width:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:{{ c.soft }}">
+      <div style="position:relative;width:62px;height:62px;background:#fff;padding:4px;border-radius:4px">
+        <svg viewBox="0 0 25 25" width="100%" height="100%" style="display:block;shape-rendering:crispEdges"><path d="{{ qrPath }}" fill="#0F1B3D"></path></svg>
+        <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;padding:1px 3px;font-size:5.5px;font-weight:800;letter-spacing:.1em;color:#0F1B3D">DEMO</div>
+      </div>
+      <div style="font-family:ui-monospace,Menlo,monospace;font-size:5.5px;opacity:.7">{{ c.docNumber }}</div>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+</div>
+
+<div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:visibility 0s linear .3s;border-radius:{{ rad }};box-shadow:{{ shadow }};transform:{{ backT }};visibility:{{ backVis }}">
+<div style="position:absolute;left:0;top:0;width:320px;overflow:hidden;border-radius:14px;transform-origin:0 0;height:{{ baseH }};transform:{{ scaleT }};background:{{ backBg }};color:{{ backInk }}">
+
+<sc-if value="{{ c.isId }}">
+  <div style="position:absolute;inset:0;background:repeating-radial-gradient(circle at 10% -20%,transparent 0 7px,{{ c.soft }} 7px 8px)"></div>
+  <div style="position:absolute;left:30px;top:40px;font-size:96px;font-weight:800;letter-spacing:.08em;opacity:.05;transform:rotate(-14deg);white-space:nowrap">DEMO</div>
+  <div style="position:relative;height:100%;display:flex;flex-direction:column;padding:12px 12px 0;gap:8px">
+    <div style="display:flex;gap:10px">
+      <div style="flex:1;min-width:0;display:grid;grid-template-columns:1fr 1fr;column-gap:8px;row-gap:6px;align-content:start">
+        <sc-for list="{{ c.bf }}" as="f" hint-placeholder-count="4">
+          <div style="min-width:0;grid-column:{{ f.col }}">
+            <div style="font-size:5.8px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;opacity:.6;white-space:nowrap">{{ f.l }}</div>
+            <div style="font-size:9px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ f.v }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <sc-if value="{{ c.qr }}">
+        <div style="position:relative;width:66px;height:66px;background:#fff;padding:4px;border-radius:4px;flex-shrink:0">
+          <svg viewBox="0 0 25 25" width="100%" height="100%" style="display:block;shape-rendering:crispEdges"><path d="{{ qrPath }}" fill="#0F1B3D"></path></svg>
+          <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;padding:1px 3px;font-size:5.5px;font-weight:800;letter-spacing:.1em;color:#0F1B3D">DEMO</div>
+        </div>
+      </sc-if>
+    </div>
+    <sc-if value="{{ c.hasCats }}">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+        <sc-for list="{{ cats }}" as="k" hint-placeholder-count="4">
+          <div style="border-radius:4px;padding:3px 5px;border:1px solid {{ c.band }};opacity:{{ k.op }}"><div style="font-size:11px;font-weight:800;color:{{ c.band }}">{{ k.k }}</div><div style="font-size:5.8px;font-weight:600">{{ k.d }}</div></div>
+        </sc-for>
+      </div>
+    </sc-if>
+    <sc-if value="{{ c.signature }}">
+      <div><div style="font-size:5.8px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;opacity:.6">Signature du titulaire</div><div style="font-family:'Brush Script MT','Segoe Script',cursive;font-size:16px;line-height:1.2">{{ c.sigText }}</div></div>
+    </sc-if>
+    <sc-if value="{{ c.note }}"><div style="font-size:7px;line-height:1.45;opacity:.75;max-width:230px">{{ c.note }}</div></sc-if>
+    <div style="flex:1"></div>
+    <sc-if value="{{ c.mrz }}">
+      <div style="margin:0 -12px;padding:6px 12px 7px;background:rgba(255,255,255,.72);font-family:ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:1.3px;line-height:1.35;white-space:nowrap;overflow:hidden">{{ c.mrz1 }}<br>{{ c.mrz2 }}<br>{{ c.mrz3 }}</div>
+    </sc-if>
+    <sc-if value="{{ noMrz }}"><div style="display:flex;justify-content:flex-end;padding-bottom:8px;font-family:ui-monospace,Menlo,monospace;font-size:5.5px;letter-spacing:.08em;opacity:.55;white-space:nowrap">DEMO · CARDIA · {{ c.tplId }}</div></sc-if>
+  </div>
+</sc-if>
+
+<sc-if value="{{ c.isTgCni }}">
+  <div style="position:absolute;inset:0;background:radial-gradient(120% 90% at 70% 30%,rgba(255,255,255,.5),transparent 60%)"></div>
+  <div style="position:absolute;left:12px;right:12px;top:9px;height:46px;background:#F4EEDF">
+    <svg viewBox="0 0 116 18" width="100%" height="100%" preserveAspectRatio="none" style="display:block;shape-rendering:crispEdges"><path d="{{ pdfPath }}" fill="#151515"></path></svg>
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#F4EEDF;padding:1px 6px;font-size:7px;font-weight:800;letter-spacing:.16em;color:#151515">DEMO · NON LISIBLE</div>
+  </div>
+  <div style="position:absolute;left:12px;right:12px;top:62px;font-family:Arial,Helvetica,sans-serif;font-size:7px;line-height:1.8;color:#2A2A2A">
+    <div style="display:flex;gap:10px;white-space:nowrap"><div>Taille: <span style="font-family:ui-monospace,Menlo,monospace;font-size:7.8px;color:#111">{{ c.tg.taille }}</span></div><div>Groupe sanguin: <span style="font-family:ui-monospace,Menlo,monospace;font-size:7.8px;color:#111">{{ c.tg.groupe }}</span></div><div>Domicile: <span style="font-family:ui-monospace,Menlo,monospace;font-size:7.8px;color:#111">{{ c.tg.domicile }}</span></div></div>
+    <div style="display:flex;justify-content:space-between;white-space:nowrap"><div>Signes particuliers: <span style="font-family:ui-monospace,Menlo,monospace;font-size:7.8px;color:#111">{{ c.tg.signes }}</span></div><div style="font-family:ui-monospace,Menlo,monospace;font-size:8px;color:#111">{{ c.tg.ref }}</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;white-space:nowrap"><div>Père: <span style="font-family:ui-monospace,Menlo,monospace;font-size:7.8px;color:#111">{{ c.tg.pere }}</span></div><div>Mère: <span style="font-family:ui-monospace,Menlo,monospace;font-size:7.8px;color:#111">{{ c.tg.mere }}</span></div></div>
+    <div style="white-space:nowrap">Personne à prévenir: <span style="font-family:ui-monospace,Menlo,monospace;font-size:7.8px;color:#111">{{ c.tg.prevenir }}</span></div>
+  </div>
+  <div style="position:absolute;left:12px;right:12px;bottom:8px;font-family:ui-monospace,Menlo,monospace;font-size:10.4px;letter-spacing:1.7px;line-height:1.32;color:#151515;white-space:nowrap;overflow:hidden">{{ c.mrz1 }}<br>{{ c.mrz2 }}<br>{{ c.mrz3 }}</div>
+</sc-if>
+
+<sc-if value="{{ c.isPassport }}">
+  <div style="position:absolute;inset:0;background:radial-gradient(90% 70% at 50% 40%,rgba(255,255,255,.10),transparent 70%)"></div>
+  <div style="position:relative;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;color:{{ c.gold }};text-align:center">
+    <div style="font-size:7px;font-weight:700;letter-spacing:.24em">CEDEAO · ECOWAS</div>
+    <div style="font-size:10.5px;font-weight:800;letter-spacing:.12em">{{ c.state }}</div>
+    <div style="width:56px;height:56px;border-radius:50%;border:1.5px solid {{ c.gold }};display:flex;align-items:center;justify-content:center;margin:4px 0">
+      <svg width="26" height="26" viewBox="-1 -1 2 2"><path d="M0-1L.225-.309L.951-.309L.363.118L.588.809L0 .382L-.588.809L-.363.118L-.951-.309L-.225-.309Z" fill="currentColor"></path></svg>
+    </div>
+    <div style="font-size:17px;font-weight:800;letter-spacing:.24em">PASSEPORT</div>
+    <div style="font-size:8px;font-weight:600;letter-spacing:.3em;opacity:.85">PASSPORT</div>
+    <svg width="22" height="14" viewBox="0 0 22 14" fill="none" stroke="currentColor" style="margin-top:4px;stroke-width:1.3"><rect x="1" y="1" width="20" height="12" rx="1"></rect><circle cx="11" cy="7" r="3.2"></circle><path d="M1 7h4.8M16.2 7H21"></path></svg>
+    <div style="position:absolute;bottom:8px;font-size:5.8px;font-weight:700;letter-spacing:.18em;opacity:.7">DEMO · CARDIA</div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ c.isBank }}">
+  <div style="position:absolute;left:0;right:0;top:20px;height:38px;background:#0A0E18"></div>
+  <div style="position:absolute;left:18px;right:18px;top:72px;display:flex;gap:8px;align-items:center">
+    <div style="flex:1;height:30px;border-radius:3px;background:repeating-linear-gradient(-45deg,#F2F3F6 0 6px,#E2E5EC 6px 12px)"></div>
+    <div style="height:30px;padding:0 9px;border-radius:3px;background:#fff;color:#0F1B3D;display:flex;align-items:center;gap:5px"><div style="font-size:6px;font-weight:700;opacity:.6">CVV</div><div style="font-size:11px;font-weight:800;letter-spacing:.14em">•••</div></div>
+  </div>
+  <div style="position:absolute;left:18px;right:90px;top:116px;font-size:6.6px;line-height:1.55;opacity:.8">Carte de démonstration CARDIA. Aucune donnée bancaire réelle. Service client {{ c.bankName }} disponible 24h/24.</div>
+  <div style="position:absolute;left:18px;bottom:12px;font-size:5.8px;font-weight:800;letter-spacing:.16em;opacity:.7">DEMO · CARDIA</div>
+  <sc-if value="{{ c.isMc }}"><div style="position:absolute;right:18px;bottom:12px;display:flex"><div style="width:24px;height:24px;border-radius:50%;background:#EB001B"></div><div style="width:24px;height:24px;border-radius:50%;background:#F79E1B;margin-left:-10px;opacity:.92"></div></div></sc-if>
+  <sc-if value="{{ c.isVisa }}"><div style="position:absolute;right:18px;bottom:10px;font-size:19px;font-weight:800;font-style:italic">VISA</div></sc-if>
+</sc-if>
+
+<sc-if value="{{ c.isMember }}">
+  <div style="position:absolute;left:0;right:0;top:0;height:10px;background:{{ c.band }}"></div>
+  <div style="position:absolute;left:14px;right:14px;top:22px;bottom:12px;display:flex;gap:14px">
+    <sc-if value="{{ c.qr }}">
+      <div style="position:relative;width:96px;height:96px;background:#fff;padding:6px;border-radius:8px;flex-shrink:0;box-shadow:0 0 0 1px rgba(15,27,61,.08)">
+        <svg viewBox="0 0 25 25" width="100%" height="100%" style="display:block;shape-rendering:crispEdges"><path d="{{ qrPath }}" fill="#0F1B3D"></path></svg>
+        <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;padding:1px 4px;font-size:7px;font-weight:800;letter-spacing:.1em;color:#0F1B3D">DEMO</div>
+      </div>
+    </sc-if>
+    <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:7px">
+      <div style="font-size:10px;font-weight:800">{{ c.org }}</div>
+      <sc-for list="{{ c.bf }}" as="f" hint-placeholder-count="2">
+        <div><div style="font-size:6px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;opacity:.65">{{ f.l }}</div><div style="font-size:9.5px;font-weight:700">{{ f.v }}</div></div>
+      </sc-for>
+      <sc-if value="{{ c.barcode }}"><div style="height:34px;margin-top:2px;background:repeating-linear-gradient(90deg,currentColor 0 2px,transparent 2px 4px,currentColor 4px 5px,transparent 5px 8px,currentColor 8px 11px,transparent 11px 12px)"></div></sc-if>
+      <div style="flex:1"></div>
+      <div style="font-size:6.8px;line-height:1.45;opacity:.75">{{ c.note }}</div>
+      <div style="font-size:5.8px;font-weight:800;letter-spacing:.16em;opacity:.6">DEMO · CARDIA</div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ c.isTicket }}">
+  <div style="position:absolute;inset:0;padding:12px 14px;display:flex;flex-direction:column;gap:6px">
+    <div style="display:flex;justify-content:space-between"><div><div style="font-size:5.8px;font-weight:600;opacity:.55;letter-spacing:.06em">PASSAGER</div><div style="font-size:10px;font-weight:800">{{ c.passenger }}</div></div><div style="text-align:right"><div style="font-size:5.8px;font-weight:600;opacity:.55;letter-spacing:.06em">N° BILLET</div><div style="font-family:ui-monospace,Menlo,monospace;font-size:8.5px;font-weight:700">{{ c.docNumber }}</div></div></div>
+    <div style="font-size:7px;line-height:1.45;opacity:.75">{{ c.note }}</div>
+    <div style="flex:1"></div>
+    <div style="height:30px;color:#0F1B3D;background:repeating-linear-gradient(90deg,currentColor 0 2px,transparent 2px 4px,currentColor 4px 5px,transparent 5px 8px,currentColor 8px 11px,transparent 11px 12px)"></div>
+    <div style="font-size:5.8px;font-weight:800;letter-spacing:.16em;opacity:.6">DEMO · CARDIA</div>
+  </div>
+</sc-if>
+
+</div>
+</div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:340,&quot;height&quot;:215},&quot;card&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;ResolvedCard&quot;},&quot;width&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:340,&quot;min&quot;:80,&quot;max&quot;:600,&quot;tsType&quot;:&quot;number&quot;},&quot;flipped&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;axis&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Y&quot;,&quot;X&quot;],&quot;default&quot;:&quot;Y&quot;,&quot;tsType&quot;:&quot;'Y'|'X'&quot;},&quot;shadow&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { demo: null };
+  componentDidMount() {
+    if (!this.props.card) import('./templates.js').then(m => this.setState({ demo: m.resolve(m.getTemplate('TGO_IDENTITY_CNI_DEMO'), null, {}, 'preview') })).catch(() => {});
+  }
+  qr(seed) {
+    if (this._qrSeed === seed) return this._qr;
+    let h = 2166136261; for (let i = 0; i < seed.length; i++) { h ^= seed.charCodeAt(i); h = Math.imul(h, 16777619); }
+    let s = h >>> 0; const rnd = () => { s = (s + 0x6D2B79F5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+    const N = 25, inF = (x, y, ox, oy) => x >= ox && x < ox + 7 && y >= oy && y < oy + 7;
+    const fin = (x, y, ox, oy) => { const dx = x - ox, dy = y - oy; return dx === 0 || dy === 0 || dx === 6 || dy === 6 || (dx >= 2 && dx <= 4 && dy >= 2 && dy <= 4); };
+    let d = '';
+    for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+      let on;
+      const F = [[0, 0], [N - 7, 0], [0, N - 7]].find(([ox, oy]) => inF(x, y, ox, oy));
+      if (F) on = fin(x, y, F[0], F[1]);
+      else if ((x < 8 && y < 8) || (x > N - 9 && y < 8) || (x < 8 && y > N - 9)) on = false;
+      else on = rnd() > 0.52;
+      if (on) d += `M${x} ${y}h1v1h-1z`;
+    }
+    this._qrSeed = seed; this._qr = d; return d;
+  }
+  pdf(seed) {
+    if (this._pdfSeed === seed) return this._pdf;
+    let h = 2166136261; for (let i = 0; i < seed.length; i++) { h ^= seed.charCodeAt(i); h = Math.imul(h, 16777619); }
+    let s = h >>> 0; const rnd = () => { s = (s + 0x6D2B79F5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+    let d = 'M0 0h2v18h-2zM3 0h1v18h-1zM5 0h1v18h-1zM110 0h1v18h-1zM112 0h1v18h-1zM114 0h2v18h-2z';
+    for (let y = 0; y < 18; y++) for (let x = 8; x < 108; x++) if (x % 14 === 8 ? y % 2 === 0 : rnd() > 0.5) d += `M${x} ${y}h1v1h-1z`;
+    this._pdfSeed = seed; this._pdf = d; return d;
+  }
+  renderVals() {
+    const c = this.props.card || this.state.demo || {};
+    const w = this.props.width ?? 320;
+    const ratio = c.ratio || 1.586;
+    const sc = w / 320;
+    const axis = (this.props.axis ?? 'Y') === 'X' ? 'X' : 'Y';
+    const flipped = !!this.props.flipped;
+    const passBack = c.isPassport;
+    return {
+      c,
+      baseH: (320 / ratio) + 'px',
+      scaleT: `scale(${sc})`,
+      rad: (14 * sc) + 'px',
+      shadow: (this.props.shadow ?? true) ? '0 14px 32px rgba(15,35,90,.22), 0 2px 6px rgba(15,35,90,.10)' : 'none',
+      flipT: flipped ? (axis === 'X' ? 'rotateX(-180deg)' : 'rotateY(180deg)') : 'rotate3d(0,0,0,0deg)',
+      backT: axis === 'X' ? 'rotateX(180deg)' : 'rotateY(180deg)',
+      backBg: passBack ? c.cover : c.bg, backInk: passBack ? c.gold : c.ink,
+      qrPath: this.qr(c.qrSeed || 'cardia'),
+      cats: (c.cats || []).map(k => ({ ...k, op: k.on ? 1 : 0.35 })),
+      noMrz: !c.mrz,
+      pdfPath: c.isTgCni ? this.pdf(c.qrSeed || 'cni') : '',
+      frontVis: flipped ? 'hidden' : 'visible', backVis: flipped ? 'visible' : 'hidden',
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "CARDIA",
+    "slug": "cardia",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.cardia.demo"
+    },
+    "android": {
+      "package": "com.cardia.demo"
+    },
+    "web": {
+      "name": "CARDIA — Votre portefeuille"
+    },
+    "plugins": [
+      "expo-font",
+      "expo-status-bar"
+    ]
+  }
+}
